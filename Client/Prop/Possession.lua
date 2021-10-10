@@ -1,5 +1,5 @@
 local highlighted
-Client.Subscribe("Tick", function()
+function GetAimPropHighlighted()
 	local eyePos = Render.Deproject(Render.GetViewportSize() / 2)
 
 	local trace = Client.Trace(
@@ -19,10 +19,6 @@ Client.Subscribe("Tick", function()
 		highlighted:SetHighlightEnabled(false)
 		highlighted = nil
 	end
-end)
 
-Client.Subscribe("KeyPress", function(key)
-	if highlighted and key == "E" then
-		Events.CallRemote("PossessProp", highlighted)
-	end
-end)
+	return highlighted
+end

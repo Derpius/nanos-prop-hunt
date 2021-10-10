@@ -1,4 +1,4 @@
-function PossessProp(player, prop)
+function PossessProp(player, prop, bounds)
 	if not prop or not prop:IsValid() then
 		error("Cannot possess invalid prop")
 	end
@@ -13,16 +13,13 @@ function PossessProp(player, prop)
 		char:SetMesh("nanos-world::SK_None")
 	end
 
-	char:SetLocation(prop:GetLocation())
-	char:SetRotation(prop:GetRotation())
+	--char:SetLocation(prop:GetLocation())
+	--char:SetRotation(prop:GetRotation())
+	char:SetCollision(CollisionType.StaticOnly)
 
 	prop:SetGrabbable(false)
 	prop:AttachTo(char, AttachmentRule.SnapToTarget)
-
 	player:SetValue("prop", prop)
-
-	char:SetCapsuleSize(32, 64)
-	char:SetCollision(CollisionType.StaticOnly)
 
 	player:Possess(char)
 end

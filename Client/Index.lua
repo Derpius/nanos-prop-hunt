@@ -1,4 +1,18 @@
 -- Config
-Client.SetHighlightColor(Color(0, 255, 0), 0, HighlightMode.OnlyVisible)
+Client.SetHighlightColor(Color(0, 50, 0, 0.4), 0, HighlightMode.OnlyVisible) -- Prop highlight
 
-Package.Require("Prop/Possession.lua")
+Package.Require("Hunter.lua")
+Package.Require("Prop.lua")
+
+Events.Subscribe("GameStart", function()
+	local localPlayer = Client.GetLocalPlayer()
+
+	local team = localPlayer:GetTeam()
+	if team == Team.Hunter then
+		InitialiseHunter()
+	elseif team == Team.Prop then
+		InitialiseProp()
+	else
+		error("Game starting with invalid team!")
+	end
+end)

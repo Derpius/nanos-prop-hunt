@@ -1,13 +1,19 @@
 function SpawnHunter(player, pos, rot)
 	local char = Character(pos, rot, "nanos-world::SK_PostApocalyptic")
 
-	char:SetCameraMode(1)
+	char:SetCanGrabProps(false)
+	char:SetCanPunch(false)
 
-	player:SetTeam(1)
-	player:SetVOIPChannel(1)
+	char:SetCameraMode(1)
+	char:SetTeam(Team.Hunter)
+	char:SetImpactDamageTaken(0)
+	char:SetFallDamageTaken(0)
+
+	player:SetVOIPChannel(Team.Hunter)
 	player:SetVOIPSetting(VOIPSetting.Local)
 
 	player:Possess(char)
+	return char
 end
 
 function SpawnProp(player, pos, rot)
@@ -22,12 +28,15 @@ function SpawnProp(player, pos, rot)
 
 	char:SetCameraMode(2)
 	char:SetSpeedMultiplier(2)
-	char:SetTeam(2)
+	char:SetTeam(Team.Prop)
+	char:SetImpactDamageTaken(0)
+	char:SetFallDamageTaken(0)
 
 	player:SetValue("prop", false)
 
-	player:SetVOIPChannel(2)
+	player:SetVOIPChannel(Team.Prop)
 	player:SetVOIPSetting(VOIPSetting.Local)
 
 	player:Possess(char)
+	return char
 end
