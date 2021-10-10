@@ -22,12 +22,12 @@ function SpawnProp(player, pos, rot)
 
 	char:SetCameraMode(2)
 	char:SetSpeedMultiplier(2)
+	char:SetTeam(2)
 
 	player:SetValue("prop", false)
 
-	player:Possess(char)
-
-	player:SetTeam(2)
 	player:SetVOIPChannel(2)
 	player:SetVOIPSetting(VOIPSetting.Local)
+
+	player:Possess(char)
 end

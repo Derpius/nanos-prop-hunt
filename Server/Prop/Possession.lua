@@ -1,5 +1,8 @@
 function PossessProp(player, prop)
-	Package.Log("Possessing prop...")
+	if not prop or not prop:IsValid() then
+		error("Cannot possess invalid prop")
+	end
+
 	local char = player:GetControlledCharacter()
 
 	local old = player:GetValue("prop")
@@ -10,8 +13,8 @@ function PossessProp(player, prop)
 		char:SetMesh("nanos-world::SK_None")
 	end
 
-	char:SetLocation(target:GetLocation())
-	char:SetRotation(target:GetRotation())
+	char:SetLocation(prop:GetLocation())
+	char:SetRotation(prop:GetRotation())
 
 	prop:SetGrabbable(false)
 	prop:AttachTo(char, AttachmentRule.SnapToTarget)
@@ -23,3 +26,8 @@ function PossessProp(player, prop)
 
 	player:Possess(char)
 end
+
+Events.Subscribe("PossessProp", function(player, prop)
+	if not player or not prop or not player:IsValid() or not prop:IsValid() or prop:GetType() ~= "Prop" then return end
+	PossessProp(player, prop)
+end)
