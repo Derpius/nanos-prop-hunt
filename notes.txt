@@ -1,0 +1,43 @@
+Two teams with no team damage (ie we can use the built in team system)
+
+More FPS-like controls and camera locked to first person for hunters, with no weapon controls and camera locked to third person for props
+
+Method for spawning dynamic props automatically within a prop hunt map
+
+Method for maps to register themselves with us for map switching, or alternatively we iterate over every map and look for a prefix like ph_
+
+
+Gameloop:
+Join server
+if game in progress, spectate
+else, add to waiting
+
+after a game start timer, assign every player into hunters and props based on some parameters like:
+	x ratio of hunters to props (configurable and only parameter to start with)
+	recently played team
+
+Hunters will have their screen blocked out, or alternatively placed in a waiting room on the map for a configurable amount of time
+Props will be spawned as some easy to spot prop/model randomly at spawn points/areas
+
+Configurable game timer will start, displayed at the top of the screen
+
+Players can possess other props swapping their controll over to that prop (if not possible yet, just copy the target prop#s model over to us)
+Players will be given more or less health depending on the size of the prop (standard health multiplied by the object's diameter as a percentage of a human's height)
+
+Hunters will deal damage to themselves equal to what they would've dealt to props not possessed by players (with a VERY obvious warning AND a cooldown period before being able to fire again)
+
+Parameters:
+Percentage of players as hunters
+Game length
+Games before map swap
+
+For maps to give:
+Hunter spawn points
+Prop player spawn points
+
+Teams:
+0: Spectator
+1: Hunter
+2: Prop
+
+For now just pick a spawn point like sandbox does it
