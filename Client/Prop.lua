@@ -11,17 +11,14 @@ local function keyPress()
 end
 
 function InitialiseProp()
-	-- Create UI
-
 	-- Subscribe to events
 	Client.Subscribe("Tick", onTick)
 	Client.Subscribe("KeyPress", keyPress)
-end
 
-function UninitialiseProp()
-	-- Delete UI
-
-	-- Unsubscribe from events
-	Client.Unsubscribe("Tick", onTick)
-	Client.Unsubscribe("KeyPress", keyPress)
+	-- Uninitialisation
+	Events.Subscribe("GameEnd", function()
+		-- Unsubscribe from events
+		Client.Unsubscribe("Tick", onTick)
+		Client.Unsubscribe("KeyPress", keyPress)
+	end)
 end

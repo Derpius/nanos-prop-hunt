@@ -15,8 +15,6 @@ local function giveLoadout(character)
 end
 
 function InitialiseHunter(player, spawnPos, spawnRot)
-	if VERBOSE then Package.Log("Initialising hunter " .. tostring(player)) end
-
 	-- Spawn character
 	local character = SpawnHunter(player, spawnPos, spawnRot)
 
@@ -32,21 +30,29 @@ function InitialiseHunter(player, spawnPos, spawnRot)
 		character:ApplyDamage(HUNTER_DAMAGE_MUL * damage)
 	end)
 
-	-- Unblind on game start
+	-- Unblind after n seconds on game start
+	local timerHandle
 	Events.Subscribe("GameStart", function()
-		if VERBOSE then Package.Log("Freeing hunter " .. tostring(player)) end
+		timerHandle = Timer.SetTimeout(function()
+			if VERBOSE then Package.Log("Freeing hunter " .. tostring(player)) end
 
-		-- Give loadout and initialise weapon switching logic
-		giveLoadout(character)
+			-- Give loadout and initialise weapon switching logic
+			giveLoadout(character)
 
-		-- Unblind
-		unblind(player)
+			-- Unblind
+			unblind(player)
 
-		-- Enable movement
-		character:SetSpeedMultiplier(1)
+			-- Enable movement
+			character:SetSpeedMultiplier(1)
+		end, HUNTER_BLIND_TIME * 1000)
 	end)
 
 	Events.Subscribe("GameEnd", function()
+		-- Remove free timer if needed
+		if timerHandle then
+			Timer.ClearTimeout(timerHandle)
+		end
+
 		-- Clean up character
 		player:UnPossess()
 		character:Destroy()

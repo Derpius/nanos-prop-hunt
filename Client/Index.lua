@@ -5,9 +5,7 @@ Package.Require("Hunter.lua")
 Package.Require("Prop.lua")
 
 Events.Subscribe("GameStart", function()
-	local localPlayer = Client.GetLocalPlayer()
-
-	local team = localPlayer:GetTeam()
+	local team = Client.GetLocalPlayer():GetControlledCharacter():GetTeam()
 	if team == Team.Hunter then
 		InitialiseHunter()
 	elseif team == Team.Prop then
