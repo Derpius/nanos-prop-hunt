@@ -18,7 +18,7 @@ local playerCount = 0
 
 function GameManager.HandleJoin(player)
 	playerCount = playerCount + 1
-	if playerCount == 1 and state == State.Waiting then -- Begin starting the game when at least 2 people are joined
+	if playerCount == 1 and state == State.Waiting then -- Begin starting the game when at least 2 people are joined (1 for debug )
 		GameManager.Prestart()
 	end
 end
@@ -38,7 +38,7 @@ function GameManager.Prestart()
 
 	for _, player in pairs(Player.GetPairs()) do
 		log("Assigning team to " .. tostring(player))
-		if math.random() < numHuntersRequired / playersLeft then
+		if false--[[math.random() < numHuntersRequired / playersLeft]] then
 			InitialiseHunter(player, Vector(), Rotator())
 			numHuntersRequired = numHuntersRequired - 1
 

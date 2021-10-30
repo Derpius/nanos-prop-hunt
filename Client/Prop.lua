@@ -4,21 +4,19 @@ local function onTick()
 	GetAimPropHighlighted()
 end
 
-local function keyPress()
-	if key == "E" then
-		Events.CallRemote("PossessProp", GetAimPropHighlighted())
-	end
-end
+Input.Bind("interact", function()
+	local prop = GetAimPropHighlighted()
+	if not prop or not prop:IsValid() then return end
+	Events.CallRemote("PossessProp", prop, prop:GetBounds())
+end)
 
 function InitialiseProp()
 	-- Subscribe to events
 	Client.Subscribe("Tick", onTick)
-	Client.Subscribe("KeyPress", keyPress)
 
 	-- Uninitialisation
 	Events.Subscribe("GameEnd", function()
 		-- Unsubscribe from events
 		Client.Unsubscribe("Tick", onTick)
-		Client.Unsubscribe("KeyPress", keyPress)
 	end)
 end

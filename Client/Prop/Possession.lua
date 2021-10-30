@@ -7,7 +7,9 @@ function GetAimPropHighlighted()
 		eyePos.Position + eyePos.Direction * 3000,
 		CollisionChannel.PhysicsBody,
 		false,
-		true
+		true,
+		false,
+		{Client.GetLocalPlayer():GetControlledCharacter()}
 	)
 
 	if trace.Entity == highlighted then return end

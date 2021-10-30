@@ -1,0 +1,57 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Prop Hunt UI</title>
+
+	<style>
+		html, body {
+			margin: 0;
+			height: 100%;
+			width: 100%;
+			overflow: hidden;
+		}
+
+		svg {
+			width: 20em;
+		}
+	</style>
+</head>
+
+<body>
+	<span id="timer">5:36</span>
+		<svg id="info" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+			<defs>
+				<filter id="inset-shadow">
+					<feFlood flood-color="black"/>
+					<feComposite operator="out" in2="SourceGraphic"/>
+					<feGaussianBlur stdDeviation="1.5"/>
+					<feComposite operator="atop" in2="SourceGraphic"/>
+				</filter>
+				<filter id="inset-glow">
+					<feFlood flood-color="white" flood-opacity="0.2"/>
+					<feComposite operator="out" in2="SourceGraphic"/>
+					<feGaussianBlur stdDeviation="3"/>
+					<feComposite operator="atop" in2="SourceGraphic"/>
+				</filter>
+				<filter id="drop-shadow">
+					<feDropShadow
+						dx="0"
+						dy="0"
+						stdDeviation="0.5"
+						flood-color="black"
+						flood-opacity="0.2"
+					/>
+				</filter>
+			</defs>
+
+			<circle filter="url(#inset-shadow)" r="37.5" cx="50" cy="50" fill="none" stroke="#474b4f" stroke-width="5" />
+			<circle id="team-colour" filter="url(#inset-glow)" r="35" cx="50" cy="50" fill="red" stroke="none" />
+			<text id="team-name" x="50" y="50" text-anchor="middle" dominant-baseline="middle">H</text>
+		</svg>
+	</div>
+	<div id="abilities"></div>
+	<span id="ammo"></span>
+</body>
+</html>

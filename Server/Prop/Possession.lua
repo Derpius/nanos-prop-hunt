@@ -13,8 +13,10 @@ function PossessProp(player, prop, bounds)
 		char:SetMesh("nanos-world::SK_None")
 	end
 
-	--char:SetLocation(prop:GetLocation())
-	--char:SetRotation(prop:GetRotation())
+	--42, 96
+
+	char:SetLocation(prop:GetLocation() - bounds.Origin + Vector(0, 0, 96/2))
+	char:SetRotation(prop:GetRotation())
 	char:SetCollision(CollisionType.StaticOnly)
 
 	prop:SetGrabbable(false)
